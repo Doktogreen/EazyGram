@@ -1,147 +1,72 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { AppBar, Toolbar, IconButton, makeStyles, Tooltip, Switch, Button } from '@material-ui/core';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import WebIcon from '@material-ui/icons/Web';
-import AvatarLogo from './AvatarLogo';
-import DownloadButton from './DownloadButton';
-import classNames from 'classnames';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { Router, useRouter } from "next/router";
 
-const useStyles = makeStyles((theme: { 
-  palette: { type: string; secondary: { main: any; }; text: { primary: any; }; }; spacing: (arg0: number) => any; }) => ({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    position: 'fixed',
+    right: 0,
+    left: 0,
+  },
   appBar: {
-    backgroundColor: theme.palette.type === 'dark' ? theme.palette.secondary.main : '#fcf5ebcc', 
-    color: theme.palette.text.primary,
-    position: 'sticky',
-    top: 0,
-    boxShadow: '0px 0px 0px -1px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 1px 0px 0px rgb(0 0 0 / 12%) !important'
+    backgroundColor: theme.palette.primary.main,
+    boxShadow: "none",
   },
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  logoButton: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  socialLinks: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  socialIcon: {
-    marginLeft: theme.spacing(2),
+  logo: {
+    display: "flex",
+    alignItems: "center",
     marginRight: theme.spacing(2),
-    color: theme.palette.type === 'dark' ? '#1874f4' : '#000',
   },
-  button: {
+  logoIcon: {
+    width: "48px",
+    height: "48px",
+    borderRadius: "50%",
+    backgroundColor: "#F5BE00",
+    marginRight: theme.spacing(1),
+  },
+  logoText: {
+    color: "white",
+    fontSize: "24px",
+    fontWeight: "bold",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  actionButton: {
     marginLeft: theme.spacing(2),
-    color: theme.palette.type === 'dark' ? '#fff' : '#000', // set color for light and dark themes
-    backgroundColor: theme.palette.type === 'dark' ? '#1874f4' : '#f5f5f5', // set background color for light and dark themes
-    '&:hover': {
-      backgroundColor: theme.palette.type === 'dark' ? '#1874f4' : '#dbdbdb', // set hover background color for light and dark themes
+    backgroundColor: "#F5BE00",
+    color: "#14172C",
+    "&:hover": {
+      backgroundColor: "#F5BE00",
     },
   },
 }));
 
-const Header = ({toggleTheme, themeMode}) => {
+export default function Header() {
   const classes = useStyles();
   const router = useRouter();
-  const [darkMode, setDarkMode] = useState(false);
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  const goToDownloadPage = () => {
-    console.log(router);
-    router.push('/download')
+  const send = () => {
+    router.push('/send')
   }
-  return (
-    <AppBar position="static" className={classNames(classes.appBar)}>
-      <Toolbar className={classNames(classes.toolbar)}>
-        <Link href="/" passHref>
-          <IconButton className={classNames(classes.logoButton)} edge="start" color="inherit" aria-label="Home">
-            <AvatarLogo imageUrl="https://res.cloudinary.com/skiltime/image/upload/v1609139208/SKILTIME6_rnh6qs.png" altText="Profile Image" />
-            <img src='https://res.cloudinary.com/skiltime/image/upload/v1678319602/SKILTIME1_a5mcat_1_lt38x8.png' alt="Logo" width="97" height="20" />
-          </IconButton>
-        </Link>
-        <div className={classNames(classes.socialLinks)}>
-        <div>
-          <DownloadButton label="Download" onClick={() => goToDownloadPage()} />
-        </div>
-          <Tooltip title="Instagram Login">
-            <IconButton
-              aria-label="Instagram"
-              className={classNames(classes.socialIcon)}
-              component="a"
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              <InstagramIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Twitter Login">
-            <IconButton
-              aria-label="Twitter"
-              className={classNames(classes.socialIcon)}
-              component="a"
-              href="https://twitter.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              <TwitterIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Facebook Login">
-            <IconButton
-              aria-label="Facebook"
-              className={classNames(classes.socialIcon)}
-              component="a"
-              href="https://www.facebook.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              <FacebookIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="LinkedIn Login">
-            <IconButton
-              aria-label="LinkedIn"
-              className={classNames(classes.socialIcon)}
-              component="a"
-              href="https://www.linkedin.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              <LinkedInIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Web Login">
-            <IconButton
-              // onClick={''}
-              aria-label="Web"
-              className={classNames(classes.socialIcon)}
-              component="a"
-              href="/signup"
-              rel="noopener"
-            >
-              <WebIcon />
-            </IconButton>
-          </Tooltip>
-          
-          <IconButton onClick={toggleTheme}>
-            {themeMode === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
-          </IconButton>
-        </div>
-      </Toolbar>
-    </AppBar>
-  );
-};
 
-export default Header;
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
+          <div className={classes.logo}>
+            <div className={classes.logoIcon} />
+            <Typography variant="h6" className={classes.logoText}>
+              EazyGram
+            </Typography>
+          </div>
+          <Button className={classes.actionButton}>Send Money</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}

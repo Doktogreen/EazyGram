@@ -1,74 +1,109 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Typography, Link } from '@material-ui/core';
-import classNames from 'classnames';
+import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.primary.contrastText,
-      padding: theme.spacing(4),
-      position: 'sticky',
-      bottom: 0,
-      overflow: 'hidden',
-      '&:before': {
-        content: '""',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        width: '100%',
-        height: '100%',
-        background: 'radial-gradient(circle, #fff 20%, transparent 20%)',
-        backgroundSize: '50px 50px',
-        zIndex: -1,
-        transform: 'translateY(-50%)',
-        animation: '$animBg 4s linear infinite',
-      },
+const useStyles = makeStyles((theme) => ({
+  footer: {
+    backgroundColor: "#002868",
+    color: "#fff",
+    padding: theme.spacing(6, 0),
+    position: "relative",
+    zIndex: 1,
+  },
+  wave: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    height: "auto",
+    zIndex: -1,
+  },
+  content: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    maxWidth: 1200,
+    margin: "0 auto",
+  },
+  section: {
+    marginBottom: theme.spacing(3),
+    "& h3": {
+      fontSize: "1.2rem",
+      marginBottom: theme.spacing(2),
     },
-    '@keyframes animBg': {
-        '0%': {
-            transform: 'translateY(-50%)',
-        },
-        '50%': {
-            transform: 'translateY(50%)',
-        },
-        '100%': {
-            transform: 'translateY(-50%)',
-        },
+    "& a": {
+      color: "#fff",
+      textDecoration: "none",
+      marginBottom: theme.spacing(1),
+      display: "block",
     },
-    link: {
-      color: theme.palette.primary.contrastText,
-      textDecoration: 'none',
-      marginLeft: theme.spacing(2),
-      '&:hover': {
-        textDecoration: 'underline',
-      },
-    },
-  }),
-);
+  },
+  disclaimer: {
+    marginTop: theme.spacing(3),
+    textAlign: "center",
+  },
+}));
 
-const Footer = () => {
+function Footer() {
   const classes = useStyles();
 
   return (
-    <footer className={classNames(classes.root)}>
-      <Typography variant="body2" align="center">
-        © 2023 Skiltime
-      </Typography>
-      <Typography variant="body2" align="center">
-        From{''}
-        <Link
-          href="https://lorgarithm.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={classNames(classes.link)}
-        >
-          Lorgarithm Inc.
-        </Link>
-      </Typography>
+    <footer className={classes.footer}>
+      <img src="/images/wave.svg" alt="Wave" className={classes.wave} />
+      <div className={classes.content}>
+        <div className={classes.section}>
+          <h3>Help and Contact</h3>
+          <a href="#">Customer Service</a>
+          <a href="#">Help Center</a>
+        </div>
+        <div className={classes.section}>
+          <h3>Fees</h3>
+          <a href="#">Fees</a>
+          <a href="#">Calculator</a>
+        </div>
+        <div className={classes.section}>
+          <h3>Security</h3>
+          <a href="#">Security Center</a>
+          <a href="#">Privacy</a>
+        </div>
+        <div className={classes.section}>
+          <h3>Features</h3>
+          <a href="#">Payment Methods</a>
+          <a href="#">Mobile App</a>
+        </div>
+        <div className={classes.section}>
+          <h3>Shop</h3>
+          <a href="#">Shop with EazyGram</a>
+        </div>
+        <div className={classes.section}>
+          <h3>See all countries/regions</h3>
+          <a href="#">Country Selector</a>
+        </div>
+        <div className={classes.section}>
+          <h3>About</h3>
+          <a href="#">About EazyGram</a>
+          <a href="#">Investor Relations</a>
+          <a href="#">Partner Program</a>
+        </div>
+        <div className={classes.section}>
+          <h3>Newsrooms</h3>
+          <a href="#">EazyGram News</a>
+          <a href="#">Announcements</a>
+          <a href="#">Press Resources</a>
+        </div>
+        <div className={classes.section}>
+          <h3>Jobs</h3>
+          <a href="#">Job Search</a>
+        </div>
+        <div className={classes.section}>
+          <h3>Developers</h3>
+          <a href="#">Developer Docs</a>
+          <a href="#">API Reference</a>
+        </div>
+      </div>
+      <div className={classes.disclaimer}>
+        <p>&copy; 1999–2023 All rights reserved. EazyGram</p>
+      </div>
     </footer>
   );
-};
-
+}
 export default Footer;

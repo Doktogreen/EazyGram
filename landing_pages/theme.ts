@@ -5,14 +5,14 @@ export const lightTheme = createTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#0070f3',
+      main: '#002868',
     },
     background: {
       default: '#fcf5ebcc',
     },
     secondary: {
       main: '#1874f4',
-      // paper: '#293145'
+      light: '#F0B90B'
     },
   },
 });
@@ -30,6 +30,7 @@ export const darkTheme = createTheme({
     },
     secondary: {
       main: '#293145',
+      light: '#F0B90B'
     },
   },
 });
